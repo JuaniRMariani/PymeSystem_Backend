@@ -11,10 +11,10 @@ public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sale_id")
-    private String sale_id;
+    private Long sale_id;
 
     @Column(name = "user_id")
-    private String user_id;
+    private Long user_id;
 
     @Column(name = "total_price")
     private int totalPrice;
