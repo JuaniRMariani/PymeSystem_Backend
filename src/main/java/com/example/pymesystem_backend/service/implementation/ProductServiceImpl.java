@@ -15,13 +15,12 @@ public class ProductServiceImpl implements ProductService {
 
     public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
         this.productRepository = productRepository;
-        this.modelMapper = new ModelMapper();
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public ProductDTO createProduct(Product product) {
-        Product productDTO = modelMapper.map(product, Product.class);
-        Product savedProduct = productRepository.save(productDTO);
+        Product savedProduct = productRepository.save(product);
         return modelMapper.map(savedProduct, ProductDTO.class);
     }
 
