@@ -11,18 +11,19 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bill_id")
-    private Long bill_id;
+    private Long id;
 
-    @Column(name = "sale_id", nullable = false)
-    private Long sale_id;
+    @OneToOne
+    @JoinColumn(name = "sale_id", nullable = false)
+    private Sale sale;
 
     @Column(name = "bill_type", nullable = false)
-    private String bill_type;
+    private String billType;
 
-    @Column(name = "bill_number", nullable = false)
-    private String bill_number;
+    @Column(name = "bill_number", nullable = false, unique = true)
+    private String billNumber;
 
     @Column(name = "cae", nullable = false)
     private String cae;
-
 }
+

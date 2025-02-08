@@ -2,17 +2,15 @@ package com.example.pymesystem_backend.dto;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class SaleDTO {
 
-    private String sale_id;
-
-    private String user_id;
-
-    private int totalPrice;
-
-    private String sale_date;
-
-    private String payment_method;
-
+    private Long saleId;
+    private Long userId;
+    private double totalPrice;
+    private LocalDateTime saleDate;
+    private String paymentMethod;
 }
+

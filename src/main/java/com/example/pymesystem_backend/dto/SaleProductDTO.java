@@ -5,12 +5,9 @@ import lombok.Data;
 @Data
 public class SaleProductDTO {
 
-    private String sale_id;
-
-    private String product_id;
-
+    private Long saleId;
+    private Long productId;
     private int quantity;
-
     private double price;
-
 }
+

@@ -5,14 +5,9 @@ import lombok.Data;
 @Data
 public class BillDTO {
 
-    private String bill_id;
-
-    private String sale_id;
-
-    private String bill_type;
-
-    private String bill_number;
-
+    private Long billId;
+    private Long saleId;
+    private String billType;
+    private String billNumber;
     private String cae;
-
 }

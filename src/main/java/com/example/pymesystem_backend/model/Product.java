@@ -10,19 +10,19 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
-    private Long product_id;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "product_name", nullable = false)
-    private String product_name;
+    private String productName;
 
     @Column(name = "stock", nullable = false)
-    private int Stock;
+    private int stock;
 
     @Column(name = "price", nullable = false)
     private double price;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
-
 }
+

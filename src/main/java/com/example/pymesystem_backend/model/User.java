@@ -19,9 +19,14 @@ public class User {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "last_name", nullable = false)
+    private String lastName; // Nuevo campo
+
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    private String role;
+    private Role role;
 }
+

@@ -3,6 +3,8 @@ package com.example.pymesystem_backend.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "sale")
 @Data
@@ -11,18 +13,19 @@ public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sale_id")
-    private Long sale_id;
+    private Long id;
 
-    @Column(name = "user_id")
-    private Long user_id;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name = "total_price")
-    private int totalPrice;
+    @Column(name = "total_price", nullable = false)
+    private double totalPrice;
 
-    @Column(name = "sale_date")
-    private String sale_date;
+    @Column(name = "sale_date", nullable = false)
+    private LocalDateTime saleDate;
 
-    @Column(name = "payment_method")
-    private String payment_method;
-
+    @Column(name = "payment_method", nullable = false)
+    private String paymentMethod;
 }
+
