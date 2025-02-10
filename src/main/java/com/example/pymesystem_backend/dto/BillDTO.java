@@ -10,4 +10,5 @@ public class BillDTO {
     private String billType;
     private String billNumber;
     private String cae;
+
 }
