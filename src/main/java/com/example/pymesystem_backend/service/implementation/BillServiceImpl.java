@@ -29,12 +29,16 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public BillDTO createBill(BillDTO bill) {
-        if(bill == null)
+    public BillDTO createBill(BillDTO newBill) {
+        if(newBill == null)
             throw new NullBillException("Bill cannot be null");
 
-        Bill billSaved = saveBill(modelMapper.map(bill, Bill.class));
-        return convertToBillDTO(billSaved);
+        Sale saleBill = getSaleBill(newBill.getSaleId());
+        Bill billSaved = createBillWithSale(newBill, saleBill);
+
+        saveBill(billSaved);
+        newBill.setBillId(billSaved.getId());
+        return newBill;
     }
 
     @Override
@@ -87,12 +91,21 @@ public class BillServiceImpl implements BillService {
         billToUpdate.setCae(bill.getCae());
     }
 
-    private Bill saveBill(Bill bill) {
-        return billRepository.save(bill);
+    private void saveBill(Bill bill) {
+        billRepository.save(bill);
     }
 
     private Sale getSaleBill(Long id) {
         return saleRepository.findById(id).orElseThrow(
                 () -> new InvalidSaleException("Sale not found"));
+    }
+
+    private Bill createBillWithSale(BillDTO BillToSave, Sale saleBill) {
+        Bill newBill = new Bill();
+        newBill.setSale(saleBill);
+        newBill.setBillType(BillToSave.getBillType());
+        newBill.setBillNumber(BillToSave.getBillNumber());
+        newBill.setCae(BillToSave.getCae());
+        return newBill;
     }
 }
