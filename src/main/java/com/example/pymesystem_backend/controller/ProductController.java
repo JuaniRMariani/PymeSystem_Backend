@@ -1,7 +1,6 @@
 package com.example.pymesystem_backend.controller;
 
 import com.example.pymesystem_backend.dto.ProductDTO;
-import com.example.pymesystem_backend.model.Product;
 import com.example.pymesystem_backend.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +21,22 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody Product product) {
+    public ResponseEntity<com.example.pymesystem_backend.dto.ProductDTO> createProduct(@RequestBody ProductDTO product) {
         return ResponseEntity.ok(productService.createProduct(product));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+    public ResponseEntity<com.example.pymesystem_backend.dto.ProductDTO> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+    public ResponseEntity<List<com.example.pymesystem_backend.dto.ProductDTO>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity<com.example.pymesystem_backend.dto.ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO product) {
         return ResponseEntity.ok(productService.updateProduct(id, product));
     }
 

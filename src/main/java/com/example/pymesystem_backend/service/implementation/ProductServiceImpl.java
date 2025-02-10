@@ -23,10 +23,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDTO createProduct(Product product) {
-        if(product == null) throw new NullProductException("Product cannot be null");
-        Product savedProduct = productRepository.save(product);
-        return modelMapper.map(savedProduct, ProductDTO.class);
+    public ProductDTO createProduct(ProductDTO product) {
+        if(product == null)
+            throw new NullProductException("Product cannot be null");
+        Product savedProduct = saveProduct(modelMapper.map(product, Product.class));
+        return convertToProductDTO(savedProduct);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDTO updateProduct(Long id, Product product) {
+    public ProductDTO updateProduct(Long id, ProductDTO product) {
         if(product == null) throw new NullProductException("Product cannot be null");
 
         Product productToUpdate = productRepository.findById(id).orElseThrow(
@@ -65,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
         return modelMapper.map(product, ProductDTO.class);
     }
 
-    private void updateProductValues(Product productToUpdate, Product updatedProduct) {
+    private void updateProductValues(Product productToUpdate, ProductDTO updatedProduct) {
         productToUpdate.setProductName(updatedProduct.getProductName());
         productToUpdate.setStock(updatedProduct.getStock());
         productToUpdate.setPrice(updatedProduct.getPrice());
@@ -81,5 +82,4 @@ public class ProductServiceImpl implements ProductService {
     private Product saveProduct(Product product) {
         return productRepository.save(product);
     }
-
 }

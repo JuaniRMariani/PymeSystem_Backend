@@ -1,11 +1,9 @@
 package com.example.pymesystem_backend.controller;
 
-import com.example.pymesystem_backend.model.Bill;
+import com.example.pymesystem_backend.dto.BillDTO;
 import com.example.pymesystem_backend.service.BillService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.example.pymesystem_backend.dto.BillDTO;
 
 import java.util.List;
 
@@ -20,7 +18,7 @@ public class BillController {
     }
 
     @PostMapping
-    public ResponseEntity<BillDTO> createBill(@RequestBody Bill bill) {
+    public ResponseEntity<BillDTO> createBill(@RequestBody BillDTO bill) {
         return ResponseEntity.ok(billService.createBill(bill));
     }
 
@@ -35,7 +33,7 @@ public class BillController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BillDTO> updateBill(@PathVariable Long id, @RequestBody Bill bill) {
+    public ResponseEntity<BillDTO> updateBill(@PathVariable Long id, @RequestBody BillDTO bill) {
         return ResponseEntity.ok(billService.updateBill(id, bill));
     }
 
