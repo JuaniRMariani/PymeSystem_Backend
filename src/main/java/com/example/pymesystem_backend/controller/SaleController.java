@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+import org.springframework.validation.annotation.Validated;
+
 @RestController
 @RequestMapping("/api/sales")
+@Validated
 public class SaleController {
 
     private final SaleService saleService;
@@ -19,29 +23,26 @@ public class SaleController {
     }
     
     @PostMapping
-    public ResponseEntity<SaleDTO> createSale(@RequestBody SaleDTO saleDTO) {
+    public ResponseEntity<SaleDTO> createSale(@Valid @RequestBody SaleDTO saleDTO) {
         SaleDTO createdSale = saleService.createSale(saleDTO);
         return new ResponseEntity<>(createdSale, HttpStatus.CREATED);
     }
     
     @GetMapping
     public ResponseEntity<List<SaleDTO>> getAllSales() {
-        List<SaleDTO> sales = saleService.getAllSales();
-        return ResponseEntity.ok(sales);
+        return ResponseEntity.ok(saleService.getAllSales());
     }
     
     @GetMapping("/{id}")
     public ResponseEntity<SaleDTO> getSaleById(@PathVariable Long id) {
-        SaleDTO sale = saleService.getSaleById(id);
-        return ResponseEntity.ok(sale);
+        return ResponseEntity.ok(saleService.getSaleById(id));
     }
     
     @PutMapping("/{id}")
     public ResponseEntity<SaleDTO> updateSale(
             @PathVariable Long id,
-            @RequestBody SaleDTO saleDTO) {
-        SaleDTO updatedSale = saleService.updateSale(id, saleDTO);
-        return ResponseEntity.ok(updatedSale);
+            @Valid @RequestBody SaleDTO saleDTO) {
+        return ResponseEntity.ok(saleService.updateSale(id, saleDTO));
     }
     
     @DeleteMapping("/{id}")
